@@ -1,6 +1,6 @@
 
-%ligaT(cidade1,cidade2,distancia).
-%ligaA(cidade1,cidade2,distancia).
+#ligaT(cidade1,cidade2,distancia).
+#ligaA(cidade1,cidade2,distancia).
 
 ligaT(amesterdam,brussels,210).
 ligaT(amesterdam,paris,501).
