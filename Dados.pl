@@ -121,3 +121,7 @@ ligaA(stockolm,copenhagen,523).
 ligaA(vienna,paris,1035).
 
 
+% predicados auxiliares
+% X e 
+membro(X,[X|_]).
+membro(X,[_|Y]):-membro(X,Y).
