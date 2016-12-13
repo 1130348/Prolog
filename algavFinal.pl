@@ -1,5 +1,5 @@
 :-[pesquisaCaminhos].
-
+:-[rotaEncomendas].
 
 imprimeMenu :- repeat,
                 write('1 - Pesquisa de caminhos para entrega de encomendas'),nl,
@@ -15,7 +15,7 @@ escolher_opcao_menu(0):-halt.
 				
 escolher_opcao_menu(1) :- menu_pesquisa.
 
-escolher_opcao_menu(2).
+escolher_opcao_menu(2):-start.
 
 menu_pesquisa:- write('Pesquisa de caminhos para entrega de encomendas'),nl,
                 repeat,
