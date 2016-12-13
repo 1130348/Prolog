@@ -1,3 +1,5 @@
+:-[auxiliares].
+
 
 %Base de Conhecimento
 %liga(Cidade1,Cidade2,distancia,meio de transporte)
@@ -157,3 +159,25 @@ astar1(NovosPercursos,Dest,Percurso,Total,Crg).
 
 %**********************************************************************
 
+astar2(Percursos,Dest,Percurso,Total,Crg):-menor_percursoh(Percursos,Menor,Restantes),
+percursos_seguintes2(Menor,Dest,Restantes,Percurso,Total,Crg).
+
+astar_maisrapido(Orig,Dest,Perc,Total,Crg):- estimativa(Orig,Dest,H), F is H + 0, % G = 0
+astar2([c(F/0,[Orig])],Dest,P,Total,Crg),reverse(P,Perc).
+
+percursos_seguintes2(c(_/Dist,Percurso),Dest,_,Percurso,Dist,_):-
+Percurso=[Dest|_].
+
+percursos_seguintes2(c(_,[Dest|_]),Dest,Restantes,Percurso,Total,Crg):-!,
+astar2(Restantes,Dest,Percurso,Total,Crg).
+
+percursos_seguintes2(c(_/Dist,[Ult|T]),Dest,Percursos,Percurso,Total,Crg):-
+findall(c(F1/D1,[Z,Ult|T]),proximo_no2(Ult,T,Z,Dist,Dest,F1/D1),Lista),
+append(Lista,Percursos,NovosPercursos),
+astar2(NovosPercursos,Dest,Percurso,Total,Crg).
+
+proximo_no2(C1,T,C2,CustoF,DestF,F/Caux):-maisRapido(C1,C2,CP),\+ member(C2,T),Caux is CustoF + CP, estimativa(C2,DestF,Heu),F is Heu + Caux.
+
+
+maisRapido(CO,CD,V):-liga(CO,CD,Dista,MT),MT is 1,V is Dista / 80.
+maisRapido(CO,CD,V):-liga(CO,CD,Dista,MT),MT is 2,V is Dista / 500.
